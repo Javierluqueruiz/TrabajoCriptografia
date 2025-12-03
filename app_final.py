@@ -126,7 +126,7 @@ elif sistema == "🛡️ Criptografía Unimodular":
     st.markdown("Generación de claves, cifrado y recuperación de errores basado en Koshkin & Styers (2017).")
 
     with st.sidebar:
-        st.header("1. Configuración de Claves")
+        st.header("2.1. Configuración de Claves")
         
         st.subheader("Matriz Unimodular U")
         col1, col2 = st.columns(2)
@@ -182,7 +182,7 @@ elif sistema == "🛡️ Criptografía Unimodular":
     # --- INTERFAZ PRINCIPAL ---
 
     # BLOQUE 1: ANÁLISIS DEL SISTEMA
-    st.header("2. Análisis del Sistema Generado")
+    st.header("2.2. Análisis del Sistema Generado")
     col_sys1, col_sys2, col_sys3, col_sys4 = st.columns(4)
 
     with col_sys1:
@@ -209,7 +209,7 @@ elif sistema == "🛡️ Criptografía Unimodular":
     st.divider()
 
     # BLOQUE 2: CIFRADO DE TEXTO
-    st.header("3. Cifrado de Mensaje")
+    st.header("2.3. Cifrado de Mensaje")
 
     texto = st.text_input("Introduce un mensaje de 4 letras:", value="HOLA", max_chars=4).upper()
 
@@ -239,7 +239,7 @@ elif sistema == "🛡️ Criptografía Unimodular":
     st.divider()
 
     # BLOQUE 3: SIMULACIÓN DE CANAL RUIDOSO
-    st.header("4. Simulación de Errores y Verificación")
+    st.header("2.4. Simulación de Errores y Verificación")
     st.markdown("Modifica los valores recibidos para simular ruido en el canal.")
 
     # Inputs para modificar la matriz recibida
@@ -308,7 +308,7 @@ elif sistema == "🛡️ Criptografía Unimodular":
     st.divider()
 
     # BLOQUE 5: RECUPERACIÓN AUTOMÁTICA
-    st.header("5. Recuperación y Corrección de Errores")
+    st.header("2.5. Recuperación y Corrección de Errores")
     st.markdown("""
     Si la verificación falla, el receptor utiliza el **Determinante Esperado** y el **Ratio de Columna** (enviado como dato de control) para reconstruir matemáticamente los datos perdidos.
     """)
