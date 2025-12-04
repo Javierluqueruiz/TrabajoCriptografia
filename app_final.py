@@ -22,7 +22,7 @@ sistema = st.sidebar.radio(
 st.sidebar.markdown("---")
 
 # ==============================================================================
-# PESTAÑA 1: CRIPTOGRAFÍA ÁUREA (Código de tu compañero)
+# PESTAÑA 1: CRIPTOGRAFÍA ÁUREA
 # ==============================================================================
 if sistema == "🏆 Criptografía Áurea":
     
@@ -31,9 +31,17 @@ if sistema == "🏆 Criptografía Áurea":
 
     # --- LÓGICA DE ESTADO (SESSION STATE) ---
     if 'n' not in st.session_state:
-        st.session_state.n = random.randint(5, 15)
+        st.session_state.n = random.randint(5, 20)
     
     n = st.session_state.n
+
+    with st.sidebar:
+        st.header("1.1. Configuración de Clave")
+        if st.button("🔄 Generar nueva clave aleatoria $n$", use_container_width=True):
+            st.session_state.n = random.randint(5, 20)
+            if "input_clave_golden" in st.session_state:
+                del st.session_state.input_clave_golden
+            st.rerun()
 
     # --- FUNCIÓN DE CIFRADO GOLDEN ---
     def calcular_matriz_cifrada(matriz_P, n):
@@ -47,11 +55,10 @@ if sistema == "🏆 Criptografía Áurea":
     subtab1, subtab2, subtab3 = st.tabs(["Cifrar mensaje", "Adivinar clave", "Sucesión de Fibonacci"])
 
     with subtab1:
-        st.write("Introduce valores numéricos enteros para la matriz $P$:")
+        st.write("Introduce valores de la matriz a cifrar, $P$:")
         col_main_1, col_main_2 = st.columns([1, 2])
         
         with col_main_1:
-            st.caption("Entrada (Matriz 2x2 de enteros)")
             c1, c2 = st.columns(2)
             with c1:
                 p00 = st.text_input("Fila 1, Col 1", value="0", key="g_p00")
@@ -61,7 +68,7 @@ if sistema == "🏆 Criptografía Áurea":
                 p11 = st.text_input("Fila 2, Col 2", value="0", key="g_p11")
             
             st.write("")
-            btn_cifrar = st.button("Cifrar matriz (Golden)", type="primary", use_container_width=True)
+            btn_cifrar = st.button("Cifrar matriz", type="primary", use_container_width=True)
 
         with col_main_2:
             if btn_cifrar:
@@ -84,12 +91,14 @@ if sistema == "🏆 Criptografía Áurea":
                     ''' % (c00, c01, c10, c11))
                 except ValueError:
                     st.error("Error: entrada inválida. Introduce solo números enteros.")
+            
 
     with subtab2:
-        st.write("Intenta deducir la clave privada $n$.")
+        st.write("")
         col_clave, _ = st.columns([1, 2])
+
         with col_clave:
-            valor_input = st.text_input("Escribe el valor de la clave privada:", key="input_clave_golden")
+            valor_input = st.text_input("Intenta deducir la clave privada $n$:", key="input_clave_golden")
             if st.button("Comprobar clave", use_container_width=True):
                 if valor_input and valor_input.strip().isdigit():
                     val_int = int(valor_input)
@@ -102,10 +111,10 @@ if sistema == "🏆 Criptografía Áurea":
                     st.warning("Entrada inválida.")
 
     with subtab3:
-        st.subheader("Primeros 15 números de Fibonacci")
+        st.subheader("Primeros 20 números de Fibonacci")
         a, b = 1, 1
         serie = [a, b]
-        for _ in range(13):
+        for _ in range(18):
             a, b = b, a + b
             serie.append(b)
         
